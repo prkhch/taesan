@@ -1,20 +1,5 @@
 # 핀테크 프로젝트
 
-<!-- 필수 항목 -->
-
-## 카테고리
-
-| Application | Domain | Language | Framework |
-| ---- | ---- | ---- | ---- |
-| :white_check_mark: Desktop Web | :white_check_mark: AI | :white_check_mark: JavaScript | :black_square_button: Vue.js |
-| :white_check_mark: Mobile Web | :white_check_mark: Big Data | :white_check_mark: TypeScript | :white_check_mark: React |
-| :white_check_mark: Responsive Web | :black_square_button: Blockchain | :black_square_button: C/C++ | :black_square_button: Angular |
-| :black_square_button: Android App | :black_square_button: IoT | :black_square_button: C# | :white_check_mark: Node.js |
-| :black_square_button: iOS App | :black_square_button: AR/VR/Metaverse | :white_check_mark: Python | :black_square_button: Flask/Django |
-| :black_square_button: Desktop App | :black_square_button: Game | :white_check_mark: Java | :white_check_mark: Spring/Springboot |
-
-<!-- 필수 항목 -->
-
 <h3> 프로젝트 소개 </h3>
 프로젝트 명 : 태산:泰山 절약 저축 플랫폼
 
@@ -52,7 +37,7 @@
 
 <div align=center>
 
-![웹 화면](exec/outputs/웹화면.png){: width="800" height=""}
+![웹 화면](exec/outputs/웹화면.png)
 
 📅 프로젝트 기간 : 2023.08.14 ~ 2023.10.06 (7주)
 
@@ -131,7 +116,7 @@
   * 중도 해지 시엔 감소된 이율을 적용합니다.
 
 
-## 소비패턴 분석 :shopping_bags:
+## 소비패턴 분석 :mag:
 |                소비 패턴 분석                 |
 |:---------------------------------------:|
 | ![소비패턴분석](exec/outputs/gif/소비패턴분석.gif)  | 
@@ -321,4 +306,4 @@ Kakao Map API, Naver Clova OCR, Naver Cloud Platform SMS
 ![taesan_artchitecture.png](exec/outputs/taesan_artchitecture.png)
 
 ### 🗃️ ERD
-![taesan_erd.png](exec/outputs/taesan_erd.png){: width="800" height=""}
+![taesan_erd.png](exec/outputs/taesan_erd.png)
