@@ -13,11 +13,11 @@ import { useQuery } from 'react-query';
 const ChallengePlayPage = () => {
   const navigate = useNavigate();
   const [challengeId, setChallengeId] = useState(0);
-  const [title, setTitle] = useState('');
-  const [price, setPrice] = useState(0);
-  const [period, setPeriod] = useState('');
+  const [title, setTitle] = useState('절약챌린지');
+  const [price, setPrice] = useState(3690000);
+  const [period, setPeriod] = useState('28');
   const [players, setPlayers] = useState([]);
-  const [spare, setSpare] = useState(0);
+  const [spare, setSpare] = useState(1369000);
   const { accessToken, refreshToken, connectedAsset, createdTikkle } = useUserStore();
   const tokenCheck = () => {
     axios

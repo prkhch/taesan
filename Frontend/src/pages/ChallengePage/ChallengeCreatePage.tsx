@@ -80,37 +80,76 @@ const ChallengeCreatePage = () => {
             title: '제목을 입력하세요!',
           });
         } else {
-          axios
-            .post(
-              `https://j9c211.p.ssafy.io/api/challenge-management/challenges/new`,
-              {
-                title: title,
-                period: period,
-                price: Number(money),
-              },
-              {
-                headers: {
-                  'ACCESS-TOKEN': accessToken,
-                  'REFRESH-TOKEN': refreshToken,
-                },
-              },
-            )
-            .then((res) => {
-              console.log(res);
-              navigate('/challenge');
-              Toast.fire({
-                icon: 'success',
-                title: '챌린지를 생성했습니다.',
-              });
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          navigate('/challenge');
+          Toast.fire({
+            icon: 'success',
+            title: '챌린지를 생성했습니다.',
+          });
         }
       }
     });
     console.log('OK 시 챌린지 생성');
   };
+
+  // const handleRecruit = (title: string, money: string, period: number) => {
+  //   Swal.fire({
+  //     title: '챌린지 생성',
+  //     html: `<span><b>${title}
+  //           <br>
+  //            ￦ ${money}
+  //            <br>
+  //            ${period}일
+  //            <br>
+  //            </b></span>
+  //            <br>
+  //            챌린지를 생성하시겠습니까?`,
+  //     icon: 'question',
+
+  //     confirmButtonColor: '#0046ff',
+  //     confirmButtonText: '생성',
+
+  //     showCancelButton: true,
+  //     cancelButtonColor: 'red',
+  //     cancelButtonText: '취소',
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       if (title === '') {
+  //         Toast.fire({
+  //           icon: 'info',
+  //           title: '제목을 입력하세요!',
+  //         });
+  //       } else {
+  //         axios
+  //           .post(
+  //             `https://j9c211.p.ssafy.io/api/challenge-management/challenges/new`,
+  //             {
+  //               title: title,
+  //               period: period,
+  //               price: Number(money),
+  //             },
+  //             {
+  //               headers: {
+  //                 'ACCESS-TOKEN': accessToken,
+  //                 'REFRESH-TOKEN': refreshToken,
+  //               },
+  //             },
+  //           )
+  //           .then((res) => {
+  //             console.log(res);
+  //             navigate('/challenge');
+  //             Toast.fire({
+  //               icon: 'success',
+  //               title: '챌린지를 생성했습니다.',
+  //             });
+  //           })
+  //           .catch((err) => {
+  //             console.log(err);
+  //           });
+  //       }
+  //     }
+  //   });
+  //   console.log('OK 시 챌린지 생성');
+  // };
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);

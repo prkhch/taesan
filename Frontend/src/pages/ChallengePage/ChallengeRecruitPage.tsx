@@ -19,12 +19,12 @@ const ChallengeRecruitPage = () => {
   const navigate = useNavigate();
   const [challengeId, setChallengeId] = useState(0);
   const [challengeState, setChallengeState] = useState(0);
-  const [roomcode, setRoomcode] = useState('');
-  const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [period, setPeriod] = useState('');
-  const [players, setPlayers] = useState([]);
-  const [creator, setCreator] = useState(false);
+  const [roomcode, setRoomcode] = useState('123456');
+  const [title, setTitle] = useState('같이해요!');
+  const [price, setPrice] = useState('3690000');
+  const [period, setPeriod] = useState('28');
+  const [players, setPlayers] = useState(['게스트', '신규람', '김하영', '배용현', '이지헌', '김성준', '박희창']);
+  const [creator, setCreator] = useState(true);
   const { accessToken, refreshToken, connectedAsset, createdTikkle } = useUserStore();
   const tokenCheck = () => {
     axios
@@ -131,6 +131,8 @@ const ChallengeRecruitPage = () => {
       cancelButtonColor: 'red',
       cancelButtonText: '취소',
     }).then((result) => {
+      navigate('/challenge/play');
+
       // POST 챌린지 시작
       if (result.isConfirmed) {
         axios

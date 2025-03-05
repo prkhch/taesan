@@ -56,33 +56,17 @@ const ChallengeButtonList = () => {
       inputValidator: (value) => {
         if (!value) {
           return '방 코드를 입력해주세요!';
+        } else if (value !== '123456') {
+          return '존재하지 않는 방입니다.';
         }
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .post(
-            `https://j9c211.p.ssafy.io/api/challenge-management/challenges/join`,
-            {
-              uuid: result.value,
-            },
-            {
-              headers: {
-                'ACCESS-TOKEN': accessToken,
-                'REFRESH-TOKEN': refreshToken,
-              },
-            },
-          )
-          .then((res) => {
-            navigate('/challenge/recruit');
-            Toast.fire({
-              icon: 'success',
-              title: '챌린지에 참여했습니다.',
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        navigate('/challenge/recruit');
+        Toast.fire({
+          icon: 'success',
+          title: '챌린지에 참여했습니다.',
+        });
       }
     });
   };
@@ -95,16 +79,16 @@ const ChallengeButtonList = () => {
             생성하기
           </Button>
         )}
-        {challengeState === 1 && (
-          <Button className="bg-main tb:text-md dt:text-xl" onClick={() => navigate(`/challenge/recruit`)}>
-            모집중
-          </Button>
-        )}
-        {challengeState === 2 && (
-          <Button className="bg-main tb:text-md dt:text-xl" onClick={() => navigate('/challenge/play')}>
-            진행중
-          </Button>
-        )}
+        {/* {challengeState === 1 && ( */}
+        <Button className="bg-main tb:text-md dt:text-xl" onClick={() => navigate(`/challenge/recruit`)}>
+          모집중
+        </Button>
+        {/* )} */}
+        {/* {challengeState === 2 && ( */}
+        <Button className="bg-main tb:text-md dt:text-xl" onClick={() => navigate('/challenge/play')}>
+          진행중
+        </Button>
+        {/* )} */}
         {challengeState === 0 && (
           <Button className="bg-main tb:text-md dt:text-xl" onClick={handleInputRoomcode}>
             같이하기

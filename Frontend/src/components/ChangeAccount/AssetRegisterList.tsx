@@ -71,34 +71,46 @@ const AssetRegisterList = ({ accountNumber }: { accountNumber: string }) => {
   const useCardQuery = useQuery('getCardList', getCardList);
   const enrollAsset = () => {
     // 자산 등록 API
-    axios
-      .post(
-        'https://j9c211.p.ssafy.io/api/member-management/members/account',
 
-        { account: account },
-        {
-          headers: {
-            'ACCESS-TOKEN': accessToken,
-            'REFRESH-TOKEN': refreshToken,
-          },
-        },
-      )
-      .then((response) => {
-        Swal2.fire({
-          icon: 'success',
-          title: '자산 연동이 완료되었습니다.',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        console.log(response);
-        console.log(account, '계좌번호');
-        setConnectedAsset(true);
-        navigate('/main');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    Swal2.fire({
+      icon: 'success',
+      title: '자산 연동이 완료되었습니다.',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    setConnectedAsset(true);
+    navigate('/main');
   };
+  // const enrollAsset = () => {
+  //   // 자산 등록 API
+  //   axios
+  //     .post(
+  //       'https://j9c211.p.ssafy.io/api/member-management/members/account',
+
+  //       { account: account },
+  //       {
+  //         headers: {
+  //           'ACCESS-TOKEN': accessToken,
+  //           'REFRESH-TOKEN': refreshToken,
+  //         },
+  //       },
+  //     )
+  //     .then((response) => {
+  //       Swal2.fire({
+  //         icon: 'success',
+  //         title: '자산 연동이 완료되었습니다.',
+  //         showConfirmButton: false,
+  //         timer: 1500,
+  //       });
+  //       console.log(response);
+  //       console.log(account, '계좌번호');
+  //       setConnectedAsset(true);
+  //       navigate('/main');
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   const handleNextButton = () => {
     if (account === '') {
@@ -116,15 +128,11 @@ const AssetRegisterList = ({ accountNumber }: { accountNumber: string }) => {
       useQuery로 받아온 데이터가 있어야하고, 각 데이터에 카드나 계좌가 존재해야 페이지가 렌더링 됨. ( undefined인 경우를 위한 예외처리 )
       */}
       {nextButton ? (
-        useCardQuery.data && useCardQuery.data.response.cardList ? (
-          <CardRegister cardList={useCardQuery.data.response.cardList} />
+        cardList ? (
+          <CardRegister cardList={cardList} />
         ) : null
-      ) : useAccountQuery.data && useAccountQuery.data.response.accountList ? (
-        <AccountRegister
-          setAccount={setAccount}
-          accountList={useAccountQuery.data.response.accountList}
-          accountNumber={accountNumber}
-        />
+      ) : DummyAccount ? (
+        <AccountRegister setAccount={setAccount} accountList={DummyAccount} accountNumber={accountNumber} />
       ) : null}
       {nextButton ? (
         <div className="text-center mt-10">
@@ -148,5 +156,47 @@ const AssetRegisterList = ({ accountNumber }: { accountNumber: string }) => {
     </div>
   );
 };
+
+const cardList = [
+  {
+    cardId: 2,
+    cardCompany: '신한은행',
+    cardNumber: '2345-6789-0123-4567',
+    cardName: '신한카드',
+  },
+  {
+    cardId: 3,
+    cardCompany: '우리은행',
+    cardNumber: '3456-7890-1234-5678',
+    cardName: '우리카드',
+  },
+  {
+    cardId: 6,
+    cardCompany: '하나은행',
+    cardNumber: '6789-0123-4567-8901',
+    cardName: '하나카드',
+  },
+];
+
+const DummyAccount = [
+  {
+    accountNum: '123-456-789012',
+    bank: '국민은행',
+    accountName: '게스트의 국민은행 계좌',
+    balance: 1250000,
+  },
+  {
+    accountNum: '987-654-321098',
+    bank: '신한은행',
+    accountName: '게스트의 신한은행 계좌',
+    balance: 850000,
+  },
+  {
+    accountNum: '567-890-123456',
+    bank: '카카오뱅크',
+    accountName: '게스트의 카카오뱅크 계좌',
+    balance: 320000,
+  },
+];
 
 export default AssetRegisterList;

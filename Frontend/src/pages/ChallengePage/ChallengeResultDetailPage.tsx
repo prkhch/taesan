@@ -10,12 +10,12 @@ import { useNavigate } from 'react-router-dom';
 
 const ChallengeResultDetailPage = () => {
   const { id } = useParams();
-  const [title, setTitle] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [title, setTitle] = useState('절약챌린지N');
+  const [endDate, setEndDate] = useState('2023-03-01');
   const [players, setPlayers] = useState([]);
-  const [price, setPrice] = useState(0);
-  const [spare, setSpare] = useState(0);
-  const [startDate, setStartDate] = useState('');
+  const [price, setPrice] = useState(3900000);
+  const [spare, setSpare] = useState(1369000);
+  const [startDate, setStartDate] = useState('2023-02-01');
   const { accessToken, refreshToken, connectedAsset, createdTikkle } = useUserStore();
   const navigate = useNavigate();
   const tokenCheck = () => {

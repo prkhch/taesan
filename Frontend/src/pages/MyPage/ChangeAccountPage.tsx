@@ -18,9 +18,9 @@ const ChangeAccountPage = () => {
     useUserStore();
   const [selectedItem, setSelectedItem] = useState(null);
   const [changeAccount, setChangeAccount] = useState('');
-  const [bankName, setBankName] = useState(''); // 은행 이름
-  const [accountNumber, setAccountNumber] = useState(''); // 계좌 번호
-  const [balance, setBalance] = useState(0); // 잔액
+  const [bankName, setBankName] = useState('우리은행'); // 은행 이름
+  const [accountNumber, setAccountNumber] = useState('369-369-369'); // 계좌 번호
+  const [balance, setBalance] = useState(96396300); // 잔액
   const navigate = useNavigate();
   const tokenCheck = () => {
     axios
@@ -111,9 +111,9 @@ const ChangeAccountPage = () => {
               {bankName} {accountNumber}{' '}
             </div>
           </div>
-          <div className="flex items-center font-main font-semibold">
-            {balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
-          </div>
+        </div>
+        <div className="flex items-center font-main font-semibold">
+          {balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
         </div>
         <hr className="my-5 border-gray-400 border-1 w-full" />
 

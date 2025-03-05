@@ -16,12 +16,12 @@ const UserModifyPage = () => {
   const navigate = useNavigate();
 
   // 각 항목 State 생성
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useFormatPhone('');
-  const [email, setEmail] = useState('');
-  const [zonecode, setZonecode] = useState('');
-  const [postcode, setPostcode] = useState('');
-  const [detailPostcode, setDeatailPostcode] = useState('');
+  const [name, setName] = useState('게스트');
+  const [phone, setPhone] = useFormatPhone('010-6866-3044');
+  const [email, setEmail] = useState('shjc4623@gmail.com');
+  const [zonecode, setZonecode] = useState('62218');
+  const [postcode, setPostcode] = useState('광산구 하남산단 6번로 107');
+  const [detailPostcode, setDeatailPostcode] = useState('삼성전자 광주사업장');
   const { accessToken, refreshToken } = useUserStore();
 
   const tokenCheck = () => {
