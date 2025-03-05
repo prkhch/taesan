@@ -17,7 +17,7 @@ const OnedaySaveMoney: React.FC<OnedaySaveMoneyProps> = ({ dayData, selectedDate
       {dayData.map((habit: any, index: number) => (
         <div
           key={index}
-          className="w-full flex justify-between mt-2"
+          className="w-full flex justify-between mt-2 cursor-pointer"
           onClick={() => {
             navigate(`/habit/detail/${habit.habitId}`);
           }}

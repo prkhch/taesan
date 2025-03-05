@@ -17,17 +17,17 @@ import { useNavigate } from 'react-router-dom';
 
 const HistoryDetail = () => {
   const navigate = useNavigate();
-  const [approvedAmount, setApprovedAmount] = useState('');
-  const [cardType, setCardType] = useState('');
-  const [category, setCategory] = useState('');
-  const [dateTime, setDateTime] = useState('');
-  const [shopName, setShopName] = useState('');
-  const [recentCount, setRecentCount] = useState('');
-  const [recentSum, setRecentSum] = useState('');
-  const [shopNumber, setShopNumber] = useState('');
+  const [approvedAmount, setApprovedAmount] = useState('25000');
+  const [cardType, setCardType] = useState('01');
+  const [category, setCategory] = useState('편의점');
+  const [dateTime, setDateTime] = useState('2024-03-05');
+  const [shopName, setShopName] = useState('GS25');
+  const [recentCount, setRecentCount] = useState('3');
+  const [recentSum, setRecentSum] = useState('50000');
+  const [shopNumber, setShopNumber] = useState('1');
   const [loading, setLoading] = useState(false);
   const { transactionId } = useParams<{ transactionId: string }>();
-  const [analys, setAnalys] = useState(false);
+  const [analys, setAnalys] = useState(true);
   const [receiptImage, setReceiptImage] = useState<File | null>(null);
   const [originalItem, setOriginalItem] = useState<{ name: string; price: string }>({ name: '', price: '' });
   const [addItem, setAddItem] = useState(false);
@@ -48,41 +48,58 @@ const HistoryDetail = () => {
     receipts: [],
   });
 
-  const [editableItemIndex, setEditableItemIndex] = useState<number | null>(null);
+  const dummyClovaAnalys = {
+    items: [
+      { name: '1만원 상품권', price: '10000' },
+      { name: '1만원 상품권', price: '10000' },
+      { name: '5천원 상품권', price: '5000' },
+    ],
+  };
 
+  const [editableItemIndex, setEditableItemIndex] = useState<number | null>(null);
   const postOCR = () => {
-    const formData = new FormData();
     if (receiptImage) {
-      formData.append('img', receiptImage);
-      axios
-        .post('https://j9c211.p.ssafy.io/api/analyst-management/analysts/receipt', formData, {
-          headers: {
-            'ACCESS-TOKEN': accessToken,
-            'REFRESH-TOKEN': refreshToken,
-          },
-        })
-        .then((response) => {
-          const updatedClovaAnalys = {
-            items: response.data.response.list.map((item: any) => ({
-              name: item.name,
-              price: item.sumPrice.toString(),
-            })),
-          };
-          setClovaAnalys(updatedClovaAnalys);
-          setImgRegister(true);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.log(formData);
-          Swal.fire({
-            icon: 'error',
-            title: '사진을 인식하지 못했어요',
-          });
-          navigate(0);
-          setLoading(false);
-        });
+      setImgRegister(true);
+      setTimeout(() => {
+        setClovaAnalys(dummyClovaAnalys);
+        setLoading(false);
+      }, 2000);
     }
   };
+
+  // const postOCR = () => {
+  //   const formData = new FormData();
+  //   if (receiptImage) {
+  //     formData.append('img', receiptImage);
+  //     axios
+  //       .post('https://j9c211.p.ssafy.io/api/analyst-management/analysts/receipt', formData, {
+  //         headers: {
+  //           'ACCESS-TOKEN': accessToken,
+  //           'REFRESH-TOKEN': refreshToken,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         const updatedClovaAnalys = {
+  //           items: response.data.response.list.map((item: any) => ({
+  //             name: item.name,
+  //             price: item.sumPrice.toString(),
+  //           })),
+  //         };
+  //         setClovaAnalys(updatedClovaAnalys);
+  //         setImgRegister(true);
+  //         setLoading(false);
+  //       })
+  //       .catch((error) => {
+  //         console.log(formData);
+  //         Swal.fire({
+  //           icon: 'error',
+  //           title: '사진을 인식하지 못했어요',
+  //         });
+  //         navigate(0);
+  //         setLoading(false);
+  //       });
+  //   }
+  // };
   const getTransactionDetail = () => {
     axios
       .get(`https://j9c211.p.ssafy.io/api/transactions/${transactionId}/${selectedCardId}/detail`, {
@@ -251,33 +268,39 @@ const HistoryDetail = () => {
       });
       return;
     } else {
-      const postClovaAnalys = {
-        productList: clovaAnalys.items.map((item: any) => ({
-          productName: item.name,
-          price: item.price,
-        })),
-      };
-      axios
-        .post(`https://j9c211.p.ssafy.io/api/transactions/${transactionId}/receipt`, postClovaAnalys, {
-          headers: {
-            'Content-Type': 'application/json',
-            'ACCESS-TOKEN': accessToken,
-            'REFRESH-TOKEN': refreshToken,
-          },
-        })
-        .then((res) => {
-          console.log('등록 완료');
-          console.log(res);
-          Swal.fire({
-            icon: 'success',
-            title: '등록 완료',
-          });
-          navigate(0);
-        })
-        .catch((err) => {
-          console.log(err);
-          console.log(postClovaAnalys);
-        });
+      // const postClovaAnalys = {
+      //   productList: clovaAnalys.items.map((item: any) => ({
+      //     productName: item.name,
+      //     price: item.price,
+      //   })),
+      // };
+      // axios
+      //   .post(`https://j9c211.p.ssafy.io/api/transactions/${transactionId}/receipt`, postClovaAnalys, {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       'ACCESS-TOKEN': accessToken,
+      //       'REFRESH-TOKEN': refreshToken,
+      //     },
+      //   })
+      //   .then((res) => {
+      //     console.log('등록 완료');
+      //     console.log(res);
+      //     Swal.fire({
+      //       icon: 'success',
+      //       title: '등록 완료',
+      //     });
+      //     navigate(0);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     console.log(postClovaAnalys);
+      //   });
+      Swal.fire({
+        icon: 'success',
+        title: '등록 완료',
+      }).then(() => {
+        navigate(0);
+      });
     }
   };
   const formatDate = (dateTime: any) => {

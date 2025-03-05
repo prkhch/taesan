@@ -226,7 +226,6 @@ export default HistoryPage;
 // ,[])
 
 const dummyTransactions = [
-  // ✅ [1페이지] 데이터 (10개)
   {
     cardHistoryId: 1,
     approvedAmount: 15000,

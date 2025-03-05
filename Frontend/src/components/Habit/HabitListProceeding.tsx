@@ -55,11 +55,11 @@ const HabitListProceeding = () => {
 
   return (
     <div>
-      <div className="w-full flex flex-col justify-between mt-2">
+      <div className="w-full flex flex-col justify-between mt-2 ">
         {dummyHabitData
           ? dummyHabitData.response.map((habit: any, index: number) => (
               <div
-                className="w-full flex justify-between mt-2"
+                className="w-full flex justify-between mt-2 cursor-pointer"
                 onClick={() => {
                   navigate(`/habit/detail/${habit.habitId}`);
                 }}

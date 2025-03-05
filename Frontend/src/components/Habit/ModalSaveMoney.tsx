@@ -134,7 +134,7 @@ const ModalSaveMoney: React.FC<ModalSaveMoneyProps> = ({ todaySave }) => {
           {todaySave.length > 0 ? (
             <>
               {todaySave.map((habit: any, index: number) => (
-                <div className="w-full flex justify-between mt-2" key={index}>
+                <div className="w-full flex justify-between mt-2 " key={index}>
                   <ListItemPrefix>
                     {habit.habitTitle === '담배' ? (
                       <img className="p-1 w-14" alt="candice" src="/Habit/담배.png" />
