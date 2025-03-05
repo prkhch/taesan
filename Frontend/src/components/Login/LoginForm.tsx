@@ -30,26 +30,30 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<FormProps>({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: FormProps) => {
-    axios
-      .post('https://j9c211.p.ssafy.io/api/member-management/members/login', {
-        loginId: data.loginId,
-        password: data.password,
-        autoLogin: autoLogin,
-      })
-      .then((res) => {
-        console.log(res.data);
-        console.log(res.data.response.accessToken);
-        console.log(res.data.response.refreshToken);
-        setAccessToken(res.data.response.accessToken);
-        setRefreshToken(res.data.response.refreshToken);
-        setUserId(res.data.response.userId);
-        navigate('/main');
-      })
-      .catch((err) => {
-        console.log(err);
-        setErrorMsg('아이디와 비밀번호를 확인해주세요.');
-      });
+  // const onSubmit = (data: FormProps) => {
+  //   axios
+  //     .post('https://j9c211.p.ssafy.io/api/member-management/members/login', {
+  //       loginId: data.loginId,
+  //       password: data.password,
+  //       autoLogin: autoLogin,
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       console.log(res.data.response.accessToken);
+  //       console.log(res.data.response.refreshToken);
+  //       setAccessToken(res.data.response.accessToken);
+  //       setRefreshToken(res.data.response.refreshToken);
+  //       setUserId(res.data.response.userId);
+  //       navigate('/main');
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       setErrorMsg('아이디와 비밀번호를 확인해주세요.');
+  //     });
+  // };
+
+  const onSubmit = () => {
+    navigate('/main');
   };
   console.log(autoLogin);
   return (

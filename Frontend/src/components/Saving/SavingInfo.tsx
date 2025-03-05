@@ -29,7 +29,8 @@ const SavingInfo: React.FC<SavingInfoProps> = ({ savingInfo }) => {
         </Button>
       </div>
       <div className="text-center text-blue-500 text-3xl text font-semibold mt-5">
-        {name}님의 <br /> 적금통 조회하기
+        <span className="text-black">{name}</span>
+        님의 <br /> 적금통 조회하기
       </div>
       <div className="flex justify-center h-64 dt:h-96">
         <img src="/Main/습관저금통.png" />

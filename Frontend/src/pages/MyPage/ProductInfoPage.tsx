@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ArrowBack from 'components/Common/ArrowBack';
 import SavingsOutlinedIcon from '@mui/icons-material/SavingsOutlined';
 import BottomNav from 'components/Common/BottomNav';
@@ -12,26 +12,30 @@ const ProductInfoPage = () => {
   const [info, setInfo] = useState('');
   const { accessToken, refreshToken } = useUserStore();
   const navigate = useNavigate();
-  const tokenCheck = ()=>{
-    axios.post('https://j9c211.p.ssafy.io/api/member-management/members/check/access-token',{},{
-      headers: {
-        'ACCESS-TOKEN': accessToken,
-        'REFRESH-TOKEN': refreshToken,
-      },
-    })
-    .then((res)=>{
-
-      if(res.data.response === false){
-        navigate('/')
-      }
-    })
-    .catch((err)=>{
-      console.log(err)
-      navigate('/')
-    })
-  }
+  const tokenCheck = () => {
+    axios
+      .post(
+        'https://j9c211.p.ssafy.io/api/member-management/members/check/access-token',
+        {},
+        {
+          headers: {
+            'ACCESS-TOKEN': accessToken,
+            'REFRESH-TOKEN': refreshToken,
+          },
+        },
+      )
+      .then((res) => {
+        if (res.data.response === false) {
+          navigate('/');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate('/');
+      });
+  };
   useEffect(() => {
-    tokenCheck();
+    // tokenCheck();
   }, []);
   return (
     <div className="h-screen flex flex-col font-main">

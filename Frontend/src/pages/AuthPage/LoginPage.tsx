@@ -5,6 +5,7 @@ import { useUserStore } from 'store/UserStore';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Pincode } from 'components/Login/SimpleLogin';
+import TestNotification from 'components/Common/TestNotification';
 const LoginPage = () => {
   const [showLanding, setShowLanding] = useState(true);
   const [isSimpleLogin, setIsSimpleLogin] = useState(false);
@@ -13,11 +14,26 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   // 랜딩 페이지
+  const { setConnectedAsset, setCreatedTikkle } = useUserStore();
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLanding(false);
+      setConnectedAsset(false);
+      setCreatedTikkle(false);
     }, 2900);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleNotification = async () => {
+      await TestNotification();
+    };
+
+    const timerId = setTimeout(() => {
+      handleNotification();
+    }, 3000);
+    return () => clearTimeout(timerId);
   }, []);
 
   // 토큰 유효성 검사

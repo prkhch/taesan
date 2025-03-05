@@ -44,38 +44,49 @@ export const Pincode = ({ onCorrectPincode, visibleFalse }: Props) => {
     setStack([]);
   };
 
+  // const handleConfirmPincode = () => {
+  //   axios
+  //     .post(
+  //       'https://j9c211.p.ssafy.io/api/auth-management/auths/simple-password/check',
+  //       {
+  //         simplePassword: stack.join(''),
+  //       },
+  //       {
+  //         headers: {
+  //           'ACCESS-TOKEN': accessToken,
+  //           'REFRESH-TOKEN': refreshToken,
+  //         },
+  //       },
+  //     )
+  //     .then((res) => {
+  //       console.log('ads', res);
+  //       if (res.data.response) {
+  //         onCorrectPincode(); // onPincode는 상위 컴포넌트로 핀코드 뷰를 닫는 함수가 있어야 함
+  //       } else {
+  //         setErrorMessage('잘못된 입력입니다.');
+  //         setStack([]);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
   const handleConfirmPincode = () => {
-    axios
-      .post(
-        'https://j9c211.p.ssafy.io/api/auth-management/auths/simple-password/check',
-        {
-          simplePassword: stack.join(''),
-        },
-        {
-          headers: {
-            'ACCESS-TOKEN': accessToken,
-            'REFRESH-TOKEN': refreshToken,
-          },
-        },
-      )
-      .then((res) => {
-        console.log('ads', res);
-        if (res.data.response) {
-          onCorrectPincode(); // onPincode는 상위 컴포넌트로 핀코드 뷰를 닫는 함수가 있어야 함
-        } else {
-          setErrorMessage('잘못된 입력입니다.');
-          setStack([]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (stack.join('') === '123456') {
+      onCorrectPincode(); // onPincode는 상위 컴포넌트로 핀코드 뷰를 닫는 함수가 있어야 함
+    } else {
+      setStack([]);
+      setErrorMessage('잘못된 입력입니다.');
+    }
   };
 
   useEffect(() => {
     // 핀코드가 MAX_LENGTH에 도달했는지 확인
     if (stack.length === MAX_LENGTH) {
       handleConfirmPincode();
+    }
+    if (stack.length === 1) {
       setErrorMessage('');
     }
   }, [stack]);
@@ -94,10 +105,8 @@ export const Pincode = ({ onCorrectPincode, visibleFalse }: Props) => {
       <div className="fixed top-10 left-5  dt:left-96">
         <ArrowBackPincode pageName="뒤로가기" handleClose={handleClose} />
       </div>
-
-      <div className="text-[#0067AC] flex justify-center text-2xl tb:text-3xl dt:text-4xl font-bold mb-10">
-        암호 입력
-      </div>
+      <div className="text-[#0067AC] flex justify-center text-2xl tb:text-3xl dt:text-4xl font-bold ">암호 입력</div>
+      <div className="text-[#0067AC]">password:123456</div>
 
       <div className="flex justify-center space-x-5 text-[#0067AC] mb-5  ">
         {Array.from({ length: MAX_LENGTH }).map((_, index) => {

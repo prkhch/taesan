@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 import ChallengeResultList from 'components/ChallengeResult/ChallengeResultList';
 import ArrowBack from 'components/Common/ArrowBack';
@@ -10,28 +10,32 @@ import { useNavigate } from 'react-router-dom';
 
 const ChallengeResultPage = () => {
   console.log('GET_이전 챌린지 리스트');
-  const { accessToken, refreshToken,connectedAsset,createdTikkle } = useUserStore();
+  const { accessToken, refreshToken, connectedAsset, createdTikkle } = useUserStore();
   const navigate = useNavigate();
-  const tokenCheck = ()=>{
-    axios.post('https://j9c211.p.ssafy.io/api/member-management/members/check/access-token',{},{
-      headers: {
-        'ACCESS-TOKEN': accessToken,
-        'REFRESH-TOKEN': refreshToken,
-      },
-    })
-    .then((res)=>{
-     
-      if(res.data.response === false){
-        navigate('/')
-      }
-    })
-    .catch((err)=>{
-      console.log(err)
-      navigate('/')
-    })
-  }
+  const tokenCheck = () => {
+    axios
+      .post(
+        'https://j9c211.p.ssafy.io/api/member-management/members/check/access-token',
+        {},
+        {
+          headers: {
+            'ACCESS-TOKEN': accessToken,
+            'REFRESH-TOKEN': refreshToken,
+          },
+        },
+      )
+      .then((res) => {
+        if (res.data.response === false) {
+          navigate('/');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate('/');
+      });
+  };
   useEffect(() => {
-    tokenCheck();
+    // tokenCheck();
     if (connectedAsset === false || createdTikkle === false) {
       navigate('/main');
     }

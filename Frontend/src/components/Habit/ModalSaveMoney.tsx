@@ -128,7 +128,7 @@ const ModalSaveMoney: React.FC<ModalSaveMoneyProps> = ({ todaySave }) => {
         handler={handleOpen}
       >
         <DialogHeader className="flex justify-center text-2xl ">
-          {dayjs().format('YYYY년 MM월 DD일')} 적금하기
+          {dayjs().format('YYYY년 MM월 DD일')} 저금하기
         </DialogHeader>
         <DialogBody divider>
           {todaySave.length > 0 ? (

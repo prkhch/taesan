@@ -19,29 +19,60 @@ import Swal2 from 'sweetalert2';
 const HabitDetail = () => {
   const { habitId } = useParams<{ habitId: string }>();
   const { accessToken, refreshToken } = useUserStore();
+  const today = new Date();
   const [detailMonthData, setDetailMonthData] = useState([
     {
-      year: 2023,
-      month: 9,
-      day: 1,
-      saving: 3000,
+      year: 2024,
+      month: 2,
+      day: 12,
+      saving: 4800,
     },
     {
-      year: 2023,
-      month: 9,
+      year: 2024,
+      month: 2,
+      day: 5,
+      saving: 4800,
+    },
+    {
+      year: 2024,
+      month: 2,
       day: 2,
-      saving: 4000,
+      saving: 4800,
+    },
+    {
+      year: 2024,
+      month: 3,
+      day: 4,
+      saving: 4800,
+    },
+    {
+      year: 2024,
+      month: 3,
+      day: 4,
+      saving: 4800,
+    },
+    {
+      year: 2024,
+      month: 4,
+      day: 5,
+      saving: 4800,
+    },
+    {
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      day: today.getDate(),
+      saving: 4800,
     },
   ]);
   const [detailData, setDetailData] = useState({
     success: true,
     response: {
       habitId: 1,
-      title: '금연하겠습니다',
-      habitName: '담배',
-      startDate: '2023-10-02T09:22:53',
-      saving: 0,
-      endDate: '2023-10-02T00:23:23.12489',
+      title: '걸어다니겠습니다',
+      habitName: '택시',
+      startDate: '2024-02-02T07:09:34',
+      saving: 28800,
+      endDate: '2024-04-02T00:23:23.12489',
     },
     error: null,
   });
@@ -199,17 +230,12 @@ const HabitDetail = () => {
           <div className="text:md dt:text-lg mt-3">
             습관 시작일 : {dayjs(detailData.response.startDate).format('YYYY년 MM월 DD일')}
           </div>
-          {detailData.response.endDate !== null ? (
-            <div className="text:md dt:text-lg">
-              습관 종료일 : {dayjs(detailData.response.endDate).format('YYYY년 MM월 DD일')}
-            </div>
-          ) : (
-            <div>
-              <Button color="blue" onClick={stopHabit}>
-                습관 중단하기
-              </Button>
-            </div>
-          )}
+
+          <div>
+            <Button color="blue" onClick={stopHabit}>
+              습관 중단하기
+            </Button>
+          </div>
         </div>
         {/* 달력 */}
         <Calendar value={date} onPanelChange={onPanelChange} onSelect={onSelect} cellRender={cellRender} />

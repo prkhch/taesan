@@ -74,7 +74,7 @@ const HabitCreatePage = () => {
       });
   };
   useEffect(() => {
-    tokenCheck();
+    // tokenCheck();
     if (connectedAsset === false || createdTikkle === false) {
       navigate('/main');
     }

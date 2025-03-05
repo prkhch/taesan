@@ -13,6 +13,9 @@ interface MainAssettInfoProps {
 const MainAssettInfo = ({ createdTikkle, connectedAsset, bankName, accountNumber, balance }: MainAssettInfoProps) => {
   // const [isAssetRegisterd, setIsAssetRegisterd] = useState(false); // 자산 등록 유무 확인
   // const [isSavingRegisterd, setIsSavingRegisterd] = useState(false); // 저금통 등록 유무 확인
+  const bankName2 = '국민은행';
+  const accountNumber2 = '1234-5678-9012-3456';
+  const balance2 = 369000000;
 
   const navigate = useNavigate();
   return (
@@ -24,15 +27,15 @@ const MainAssettInfo = ({ createdTikkle, connectedAsset, bankName, accountNumber
         <div className="flex justify-between">
           <div className="flex flex-row items-center">
             <div className="mr-2">
-              <img src={`/Account/${bankName}.png`} className="h-8 border rounded-full" />
+              <img src={`/Account/${bankName2}.png`} className="h-8 border rounded-full" />
             </div>
             <div className="font-semibold font-main text-xs">
-              {bankName} {accountNumber}{' '}
+              {bankName2} {accountNumber2}{' '}
             </div>
           </div>
 
           <div className="flex items-center font-main font-semibold">
-            {balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+            {balance2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
           </div>
         </div>
       ) : (

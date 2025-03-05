@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PasswordForm from 'components/ChangePassword/PasswordForm';
 import ArrowBack from 'components/Common/ArrowBack';
 import BottomNav from 'components/Common/BottomNav';
@@ -18,26 +18,30 @@ const ChangePasswordPage = () => {
     newPasswordConfirm: '',
   });
   const navigate = useNavigate();
-  const tokenCheck = ()=>{
-    axios.post('https://j9c211.p.ssafy.io/api/member-management/members/check/access-token',{},{
-      headers: {
-        'ACCESS-TOKEN': accessToken,
-        'REFRESH-TOKEN': refreshToken,
-      },
-    })
-    .then((res)=>{
-
-      if(res.data.response === false){
-        navigate('/')
-      }
-    })
-    .catch((err)=>{
-      console.log(err)
-      navigate('/')
-    })
-  }
+  const tokenCheck = () => {
+    axios
+      .post(
+        'https://j9c211.p.ssafy.io/api/member-management/members/check/access-token',
+        {},
+        {
+          headers: {
+            'ACCESS-TOKEN': accessToken,
+            'REFRESH-TOKEN': refreshToken,
+          },
+        },
+      )
+      .then((res) => {
+        if (res.data.response === false) {
+          navigate('/');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate('/');
+      });
+  };
   useEffect(() => {
-    tokenCheck();
+    // tokenCheck();
   }, []);
   const [errorMessage, setErrorMessage] = useState('');
 

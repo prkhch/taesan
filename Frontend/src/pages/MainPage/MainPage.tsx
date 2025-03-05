@@ -89,7 +89,7 @@ const MainPage = () => {
       });
   };
   useEffect(() => {
-    tokenCheck();
+    // tokenCheck();
   }, []);
   // useQuery를 이용해 사용자 정보 호출 ( 2개의 쿼리 사용 )
   // 쿼리 1
@@ -129,6 +129,10 @@ const MainPage = () => {
 
   // const mutation = useMutation(testPost);
   // console.log(mutation);
+
+  useEffect(() => {
+    setName('게스트');
+  }, []);
 
   // 알림
   useEffect(() => {

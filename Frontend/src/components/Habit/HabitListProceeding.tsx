@@ -6,6 +6,29 @@ import { useQuery } from 'react-query';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 const HabitListProceeding = () => {
+  const dummyHabitData = {
+    response: [
+      {
+        habitId: 1,
+        habitName: '담배',
+        startDate: '2024-03-01',
+        saving: 4500,
+      },
+      {
+        habitId: 2,
+        habitName: '커피',
+        startDate: '2024-02-20',
+        saving: 45000,
+      },
+      {
+        habitId: 3,
+        habitName: '택시',
+        startDate: '2024-01-10',
+        saving: 92000,
+      },
+    ],
+  };
+
   const navigate = useNavigate();
   const { accessToken, refreshToken } = useUserStore();
 
@@ -29,11 +52,12 @@ const HabitListProceeding = () => {
     queryKey: ['proceedingHabit'],
     queryFn: proceedingHabit,
   });
+
   return (
     <div>
       <div className="w-full flex flex-col justify-between mt-2">
-        {data && data.response
-          ? data.response.map((habit: any, index: number) => (
+        {dummyHabitData
+          ? dummyHabitData.response.map((habit: any, index: number) => (
               <div
                 className="w-full flex justify-between mt-2"
                 onClick={() => {

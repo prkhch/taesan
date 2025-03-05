@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import AccountRegister from 'components/AssetRegister/AccountRegister';
 import CardRegister from 'components/AssetRegister/CardRegister';
 import { Button } from '@material-tailwind/react';
@@ -10,32 +10,35 @@ import { useNavigate } from 'react-router-dom';
 
 const AssetRegisterPage = () => {
   const navigate = useNavigate();
-  const [nextButton, setNextButton] = useState(false);
-  const { accessToken, refreshToken, userId, setConnectedAsset,connectedAsset,createdTikkle } = useUserStore();
+  const [nextButton, setNextButton] = useState(true);
+  const { accessToken, refreshToken, userId, setConnectedAsset, connectedAsset, createdTikkle } = useUserStore();
   const [account, setAccount] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
- 
 
-  const tokenCheck = ()=>{
-    axios.post('https://j9c211.p.ssafy.io/api/member-management/members/check/access-token',{},{
-      headers: {
-        'ACCESS-TOKEN': accessToken,
-        'REFRESH-TOKEN': refreshToken,
-      },
-    })
-    .then((res)=>{
-   
-      if(res.data.response === false){
-        navigate('/')
-      }
-    })
-    .catch((err)=>{
-      console.log(err)
-      navigate('/')
-    })
-  }
+  const tokenCheck = () => {
+    axios
+      .post(
+        'https://j9c211.p.ssafy.io/api/member-management/members/check/access-token',
+        {},
+        {
+          headers: {
+            'ACCESS-TOKEN': accessToken,
+            'REFRESH-TOKEN': refreshToken,
+          },
+        },
+      )
+      .then((res) => {
+        if (res.data.response === false) {
+          navigate('/');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate('/');
+      });
+  };
   useEffect(() => {
-    tokenCheck();
+    // tokenCheck();
   }, []);
 
   // useQuery를 이용해 계좌 정보 호출
@@ -93,35 +96,46 @@ const AssetRegisterPage = () => {
   };
   const useCardQuery = useQuery('getCardList', getCardList);
   const enrollAsset = () => {
-    // 자산 등록 API
-    axios
-      .post(
-        'https://j9c211.p.ssafy.io/api/member-management/members/account',
-
-        { account: account },
-        {
-          headers: {
-            'ACCESS-TOKEN': accessToken,
-            'REFRESH-TOKEN': refreshToken,
-          },
-        },
-      )
-      .then((response) => {
-        Swal2.fire({
-          icon: 'success',
-          title: '자산 연동이 완료되었습니다.',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        console.log(response);
-        console.log(account, '계좌번호');
-        setConnectedAsset(true);
-        navigate('/main');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    Swal2.fire({
+      icon: 'success',
+      title: '자산 연동이 완료되었습니다.',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    console.log(account, '계좌번호');
+    setConnectedAsset(true);
+    navigate('/main');
   };
+  // const enrollAsset = () => {
+  //   // 자산 등록 API
+  //   axios
+  //     .post(
+  //       'https://j9c211.p.ssafy.io/api/member-management/members/account',
+
+  //       { account: account },
+  //       {
+  //         headers: {
+  //           'ACCESS-TOKEN': accessToken,
+  //           'REFRESH-TOKEN': refreshToken,
+  //         },
+  //       },
+  //     )
+  //     .then((response) => {
+  //       Swal2.fire({
+  //         icon: 'success',
+  //         title: '자산 연동이 완료되었습니다.',
+  //         showConfirmButton: false,
+  //         timer: 1500,
+  //       });
+  //       console.log(response);
+  //       console.log(account, '계좌번호');
+  //       setConnectedAsset(true);
+  //       navigate('/main');
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   const handleNextButton = () => {
     if (account === '') {
@@ -139,14 +153,12 @@ const AssetRegisterPage = () => {
       useQuery로 받아온 데이터가 있어야하고, 각 데이터에 카드나 계좌가 존재해야 페이지가 렌더링 됨. ( undefined인 경우를 위한 예외처리 )
       */}
       {nextButton ? (
-        useCardQuery.data && useCardQuery.data.response.cardList ? (
-          <CardRegister cardList={useCardQuery.data.response.cardList} />
-        ) : null
+        <CardRegister cardList={cardList} />
       ) : useAccountQuery.data && useAccountQuery.data.response.accountList ? (
         <AccountRegister setAccount={setAccount} accountList={useAccountQuery.data.response.accountList} />
       ) : null}
       {nextButton ? (
-        <div className="text-center mt-10">
+        <div className="text-center m-10">
           <Button
             color="blue"
             onClick={() => {
@@ -167,5 +179,44 @@ const AssetRegisterPage = () => {
     </div>
   );
 };
+
+const cardList = [
+  {
+    cardId: 1,
+    cardCompany: '국민은행',
+    cardNumber: '1234-5678-9012-3456',
+    cardName: '국민카드',
+  },
+  {
+    cardId: 2,
+    cardCompany: '신한은행',
+    cardNumber: '2345-6789-0123-4567',
+    cardName: '신한카드',
+  },
+  {
+    cardId: 3,
+    cardCompany: '우리은행',
+    cardNumber: '3456-7890-1234-5678',
+    cardName: '우리카드',
+  },
+  {
+    cardId: 4,
+    cardCompany: '카카오뱅크',
+    cardNumber: '4567-8901-2345-6789',
+    cardName: '카카오뱅크카드',
+  },
+  {
+    cardId: 5,
+    cardCompany: '토스뱅크',
+    cardNumber: '5678-9012-3456-7890',
+    cardName: '토스뱅크카드',
+  },
+  {
+    cardId: 6,
+    cardCompany: '하나은행',
+    cardNumber: '6789-0123-4567-8901',
+    cardName: '하나카드',
+  },
+];
 
 export default AssetRegisterPage;

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardRegister from 'components/AssetRegister/CardRegister';
 import { Button } from '@material-tailwind/react';
 import { List, ListItem, ListItemPrefix, Avatar, Card, Typography } from '@material-tailwind/react';
@@ -22,26 +22,30 @@ const ChangeAccountPage = () => {
   const [accountNumber, setAccountNumber] = useState(''); // 계좌 번호
   const [balance, setBalance] = useState(0); // 잔액
   const navigate = useNavigate();
-  const tokenCheck = ()=>{
-    axios.post('https://j9c211.p.ssafy.io/api/member-management/members/check/access-token',{},{
-      headers: {
-        'ACCESS-TOKEN': accessToken,
-        'REFRESH-TOKEN': refreshToken,
-      },
-    })
-    .then((res)=>{
-     
-      if(res.data.response === false){
-        navigate('/')
-      }
-    })
-    .catch((err)=>{
-      console.log(err)
-      navigate('/')
-    })
-  }
+  const tokenCheck = () => {
+    axios
+      .post(
+        'https://j9c211.p.ssafy.io/api/member-management/members/check/access-token',
+        {},
+        {
+          headers: {
+            'ACCESS-TOKEN': accessToken,
+            'REFRESH-TOKEN': refreshToken,
+          },
+        },
+      )
+      .then((res) => {
+        if (res.data.response === false) {
+          navigate('/');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate('/');
+      });
+  };
   useEffect(() => {
-    tokenCheck();
+    // tokenCheck();
     if (connectedAsset === false) {
       Swal2.fire({
         icon: 'info',

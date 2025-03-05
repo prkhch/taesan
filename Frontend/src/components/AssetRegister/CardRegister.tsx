@@ -10,6 +10,7 @@ import axios from 'axios';
 interface CardRegisterProps {
   cardList: Array<any>;
 }
+
 const CardRegister: React.FC<CardRegisterProps> = ({ cardList }) => {
   const navigate = useNavigate();
   const { name } = useUserStore();

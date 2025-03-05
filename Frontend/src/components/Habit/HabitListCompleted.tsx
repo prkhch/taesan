@@ -8,6 +8,16 @@ import { useNavigate } from 'react-router-dom';
 const HabitListCompleted = () => {
   const { accessToken, refreshToken } = useUserStore();
   const navigate = useNavigate();
+  const dummyHabitData = {
+    response: [
+      {
+        habitId: 2,
+        habitName: '술',
+        startDate: '2024-02-20',
+        saving: 369000,
+      },
+    ],
+  };
 
   // 쿼리 1
   const completedHabit = async () => {
@@ -29,8 +39,8 @@ const HabitListCompleted = () => {
   return (
     <div>
       <div className="w-full flex flex-col justify-between mt-2">
-        {data && data.response
-          ? data.response.map((habit: any, index: number) => (
+        {dummyHabitData
+          ? dummyHabitData.response.map((habit: any, index: number) => (
               <div
                 className="w-full flex justify-between mt-2"
                 onClick={() => {

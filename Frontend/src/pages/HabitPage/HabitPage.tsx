@@ -44,23 +44,18 @@ const HabitPage = () => {
       });
   };
   useEffect(() => {
-    tokenCheck();
+    // tokenCheck();
     if (connectedAsset === false || createdTikkle === false) {
       navigate('/main');
     }
   }, []);
+  const today = new Date();
   const [monthData, setMonthData] = useState([
     {
-      year: 2023,
-      month: 9,
-      day: 1,
-      saving: 3000,
-    },
-    {
-      year: 2023,
-      month: 9,
-      day: 2,
-      saving: 4000,
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      day: today.getDate(),
+      saving: 4800,
     },
   ]);
   // 한 달 동안 총 절약한 돈.
@@ -69,30 +64,23 @@ const HabitPage = () => {
   const [dayData, setDayData] = useState([
     {
       habitId: 1,
-      title: '금연하겠습니다',
-      habitName: '담배',
-      startDate: '2023-10-02T07:09:34',
-      saving: 3000,
-    },
-    {
-      habitId: 1,
-      title: '금연하겠습니다',
-      habitName: '담배',
-      startDate: '2023-10-02T07:09:34',
-      saving: 3000,
+      title: '걸어다니겠습니다',
+      habitName: '택시',
+      startDate: '2024-02-02T07:09:34',
+      saving: 28800,
     },
   ]);
 
   const [todaySave, setTodaySave] = useState([
     {
       habitId: 4,
-      habitTitle: '쇼핑',
+      habitTitle: '커피',
       targetMoney: 5500,
     },
     {
       habitId: 5,
       habitTitle: '담배',
-      targetMoney: 4000,
+      targetMoney: 4500,
     },
   ]);
 

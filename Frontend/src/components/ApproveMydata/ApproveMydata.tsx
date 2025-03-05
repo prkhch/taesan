@@ -35,42 +35,47 @@ const ApproveMydata = () => {
   };
 
   const handleNext = () => {
-    if (check1 && check2 && check3) {
-      setIsLoading(true);
-      axios
-        .post(
-          // Post 요청할 때는 빈값일때는 {}를 보내자
-          'https://j9c211.p.ssafy.io/api/asset-management/assets/authenticate',
-          {},
-          {
-            headers: {
-              'ACCESS-TOKEN': accessToken,
-              'REFRESH-TOKEN': refreshToken,
-            },
-          },
-        )
-        .then((response) => {
-          setIsLoading(false);
-          navigate('/main/asset/register');
-        })
-        .catch((error) => {
-          setIsLoading(false);
-          Toast.fire({
-            icon: 'error',
-            title: '데이터를 불러오는데 실패했습니다!',
-          });
-
-          console.log(accessToken);
-          console.log(refreshToken);
-          console.log(error);
-        });
-    } else {
-      Swal2.fire({
-        icon: 'info',
-        title: '필수 항목에 모두 동의해주세요.',
-      });
-    }
+    setIsLoading(false);
+    navigate('/main/asset/register');
   };
+
+  // const handleNext = () => {
+  //   if (check1 && check2 && check3) {
+  //     setIsLoading(true);
+  //     axios
+  //       .post(
+  //         // Post 요청할 때는 빈값일때는 {}를 보내자
+  //         'https://j9c211.p.ssafy.io/api/asset-management/assets/authenticate',
+  //         {},
+  //         {
+  //           headers: {
+  //             'ACCESS-TOKEN': accessToken,
+  //             'REFRESH-TOKEN': refreshToken,
+  //           },
+  //         },
+  //       )
+  //       .then((response) => {
+  //         setIsLoading(false);
+  //         navigate('/main/asset/register');
+  //       })
+  //       .catch((error) => {
+  //         setIsLoading(false);
+  //         Toast.fire({
+  //           icon: 'error',
+  //           title: '데이터를 불러오는데 실패했습니다!',
+  //         });
+
+  //         console.log(accessToken);
+  //         console.log(refreshToken);
+  //         console.log(error);
+  //       });
+  //   } else {
+  //     Swal2.fire({
+  //       icon: 'info',
+  //       title: '필수 항목에 모두 동의해주세요.',
+  //     });
+  //   }
+  // };
   return (
     <div className="font-main">
       {isLoading && <Loading />}

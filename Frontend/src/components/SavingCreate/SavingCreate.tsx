@@ -31,34 +31,44 @@ const SavingCreate = () => {
   const duration = Math.max(0, dayjs(date).diff(today, 'day') + 1); // 오늘과 만기일 사이의 날짜 차이
   const navigate = useNavigate();
 
+  // const onCorrectPincode = () => {
+  //   setPincodeVisible(false);
+  //   setIsLoading(true);
+  //   axios
+  //     .post(
+  //       'https://j9c211.p.ssafy.io/api/asset-management/tikkle',
+  //       {
+  //         endDate: date,
+  //       },
+  //       {
+  //         headers: {
+  //           'ACCESS-TOKEN': accessToken,
+  //           'REFRESH-TOKEN': refreshToken,
+  //         },
+  //       },
+  //     )
+  //     .then((response) => {
+  //       // 적금통 생성 API 요청이 성공한 경우
+  //       console.log('POST: BODY(만기일)', date);
+  //       setIsLoading(false);
+  //       setCreatedTikkle(true);
+  //       setCompleteVisible(true);
+  //     })
+  //     .catch((error) => {
+  //       // 에러 처리
+  //       setIsLoading(false);
+  //       console.error('적금통 생성 실패', error);
+  //     });
+  // };
+
   const onCorrectPincode = () => {
     setPincodeVisible(false);
     setIsLoading(true);
-    axios
-      .post(
-        'https://j9c211.p.ssafy.io/api/asset-management/tikkle',
-        {
-          endDate: date,
-        },
-        {
-          headers: {
-            'ACCESS-TOKEN': accessToken,
-            'REFRESH-TOKEN': refreshToken,
-          },
-        },
-      )
-      .then((response) => {
-        // 적금통 생성 API 요청이 성공한 경우
-        console.log('POST: BODY(만기일)', date);
-        setIsLoading(false);
-        setCreatedTikkle(true);
-        setCompleteVisible(true);
-      })
-      .catch((error) => {
-        // 에러 처리
-        setIsLoading(false);
-        console.error('적금통 생성 실패', error);
-      });
+
+    console.log('POST: BODY(만기일)', date);
+    setIsLoading(false);
+    setCreatedTikkle(true);
+    setCompleteVisible(true);
   };
 
   const handleConfirm = () => {
